@@ -1,0 +1,67 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #1f1f1f, #343434);
+    color: #fff;
+    text-align: center;
+  }
+  
+  .container {
+    margin: 50px auto;
+    max-width: 600px;
+  }
+  
+  /* Error Header */
+  .error-header {
+    margin-bottom: 20px;
+  }
+  
+  .error-header h1 {
+    color: #ff4040;
+    font-size: 2rem;
+  }
+  
+  /* Retry Section */
+  .retry-section {
+    margin: 20px auto;
+    font-size: 1.2rem;
+    color: #ccc;
+  }
+  
+  /* Action Section */
+  .action-section {
+    margin-top: 30px;
+  }
+  
+  .retry-button {
+    padding: 15px 30px;
+    background: #ff4040;
+    border: none;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  
+  .retry-button:hover {
+    background: #ff7070;
+    transform: scale(1.05);
+  }
+  
+  /* Support Footer */
+  .support-footer {
+    margin-top: 50px;
+    color: #bbb;
+  }
+  
+  .support-footer a {
+    color: #00ff80;
+    text-decoration: none;
+  }
+  
+  .support-footer a:hover {
+    text-decoration: underline;
+  }
+  

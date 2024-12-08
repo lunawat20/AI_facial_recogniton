@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face Capture</title>
+  <link rel="stylesheet" href="page2.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>Face Capture App</h1>
+      <button id="help-btn" class="help-button">Help</button>
+    </header>
+
+    <!-- Instructions Section -->
+    <section class="instructions">
+      <p>Ensure your face is well-lit and centered in the frame.</p>
+    </section>
+
+    <!-- Camera View -->
+    <div class="camera-container">
+      <video id="camera" autoplay muted></video>
+      <div class="face-guide"></div>
+    </div>
+
+    <!-- Capture Button -->
+    <div class="capture-container">
+      <button id="capture-btn" class="capture-button">
+        <i class="camera-icon"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Help Modal -->
+  <div id="help-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>How to Use</h2>
+      <p>1. Make sure your face is well-lit.</p>
+      <p>2. Position your face within the guide on the screen.</p>
+      <p>3. The app will automatically capture your face when you're ready.</p>
+      <button id="close-help" class="close-button">Close</button>
+    </div>
+  </div>
+
+  <script src="page2.js"></script>
+</body>
+</html>
