@@ -1,30 +1,39 @@
+// Access video, canvas, and buttons
 const video = document.getElementById('camera');
-const captureButton = document.getElementById('capture-btn');
-const helpButton = document.getElementById('help-btn');
-const helpModal = document.getElementById('help-modal');
-const closeHelpButton = document.getElementById('close-help');
+const canvas = document.getElementById('canvas');
+const captureBtn = document.getElementById('capture-btn');
+const downloadBtn = document.getElementById('download-btn');
+const capturedImage = document.getElementById('captured-image');
 
-// Access the camera
-navigator.mediaDevices
-  .getUserMedia({ video: true })
+// Request access to the user's webcam
+navigator.mediaDevices.getUserMedia({ video: true })
   .then((stream) => {
     video.srcObject = stream;
   })
   .catch((error) => {
-    console.error('Error accessing the camera:', error);
+    console.error('Error accessing webcam:', error);
+    alert('Cannot access the webcam. Please grant permission.');
   });
 
-// Show Help Modal
-helpButton.addEventListener('click', () => {
-  helpModal.classList.remove('hidden');
+// Capture button click event
+captureBtn.addEventListener('click', () => {
+  const context = canvas.getContext('2d');
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  // Show captured image
+  capturedImage.src = canvas.toDataURL('image/png');
+  capturedImage.style.display = 'block';
+
+  // Show download button
+  downloadBtn.style.display = 'inline-block';
 });
 
-// Close Help Modal
-closeHelpButton.addEventListener('click', () => {
-  helpModal.classList.add('hidden');
-});
-
-// Auto Capture on button click (for demonstration, logs a capture message)
-captureButton.addEventListener('click', () => {
-  console.log('Captured frame!');
+// Download button click event
+downloadBtn.addEventListener('click', () => {
+  const link = document.createElement('a');
+  link.href = canvas.toDataURL('image/png');
+  link.download = 'capture.png';
+  link.click();
 });
