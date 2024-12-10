@@ -4,49 +4,209 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Login Page</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+    /* Basic Reset */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    /* Container for the 50/50 split */
+    .container {
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Left side: Login Form */
+    .login-container {
+      width: 40%;
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .logo img {
+      width: 60px;
+      margin-bottom: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .login-form h1 {
+      margin-bottom: 10px;
+      font-size: 28px;
+      color: #1e3a8a; /* Blue color for the text */
+      text-align: center;
+      animation: glowPulse 3s infinite alternate, slideInFromLeft 1.5s ease-out;
+    }
+
+    .login-form p {
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      color: #1e3a8a;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #1e3a8a;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .forgot-password {
+      color: #1e3a8a;
+      text-decoration: none;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #1e3a8a;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .login-btn:hover {
+      background-color: #2563eb;
+    }
+
+    .signup-link {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .signup-link a {
+      color: #1e3a8a;
+      text-decoration: none;
+    }
+
+    .social-login {
+      margin-top: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .social-login button {
+      width: 48%;
+      padding: 12px;
+      background-color: #1e3a8a;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .social-login button:hover {
+      background-color: #2563eb;
+    }
+
+    /* Right side: Image Background */
+    .image-container {
+      width: 40%;
+      height: 90.5vh;
+      background-image: url('https://img.freepik.com/premium-vector/abstract-facial-recognition-blue-background_23-2148209493.jpg?w=360');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Keyframes for Animations */
+  
+
+    @keyframes slideInFromLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+   
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <!-- Login Section -->
-    <div class="login-box">
-      <img src="images.png" alt="Logo" class="logo">
-      <h1 class="animated-text"> <br>Facial Cognito-</h1>
-      <p class="welcome-text"></p>Secure Your Account with AI-Driven Facial Authentication</p>
-      <form>
-        <div class="input-group">
-          <label for="email-or-phone">Phone Number or Email</label>
-          <input id="email-or-phone" type="text" placeholder="Phone Number or Email" required>
+    <!-- Left side: Login Form -->
+    <div class="login-container">
+      <div class="logo">
+        <img src="https://th.bing.com/th/id/OIP.M0FxQraZhf4ZtaOX7_scDgHaHa?rs=1&pid=ImgDetMain" alt="Logo">
+      </div>
+      <form class="login-form">
+        <h1>Secure Your Login</h1>
+        <p>Secure Your Account with AI-Driven Facial Authentication</p>
+        <div class="form-group">
+          <label for="email">Email or Username</label>
+          <input type="text" id="email" name="email" placeholder="Enter your email or username" required>
         </div>
-        <div class="input-group">
+        <div class="form-group">
           <label for="password">Password</label>
-          <input id="password" type="password" placeholder="Password" required>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
         </div>
-        <div class="input-group">
-          <input id="remember-me" type="checkbox">
-          <label for="remember-me">Remember Me</label>
+        <div class="form-options">
+          <div>
+            <input type="checkbox" id="remember-me">
+            <label for="remember-me">Remember Me</label>
+          </div>
+          <a href="#" class="forgot-password">Forgot Password?</a>
         </div>
-        <button class="login-button">Login</button>
+        <button type="submit" class="login-btn">Login</button>
+        <div class="signup-link">
+          Don't have an account? <a href="#">Sign Up</a>
+        </div>
+        <div class="social-login">
+          <button class="google-login">Login with Google</button>
+          <button class="facebook-login">Login with Facebook</button>
+        </div>
       </form>
-      <div class="links">
-        <a href="#">Forgot Password?</a>
-        <p>Don't have an account? <a href="#">Sign Up</a></p>
-      </div>
     </div>
-
-    <!-- Carousel Section -->
-    <div class="carousel">
-      <div class="carousel-images">
-        <img src="img1.jpg" alt="AI Image 1">
-        <img src="img2.jpg" alt="AI Image 2">
-        <img src="img1.jpg" alt="AI Image 3">
-      </div>
-    </div>
+    <!-- Right side: Image Background -->
+    <div class="image-container"></div>
   </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
