@@ -1,67 +1,90 @@
-/* General Styles */
+/* page4.css */
+
+/* General styles */
 body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #1f1f1f, #343434);
-    color: #fff;
-    text-align: center;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%; /* Ensure enough width for two images */
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.background-animation .bg-image {
+  width: 50%; /* Each image will take half the width */
+  height: 100%;
+  object-fit: cover;
+  animation: scroll 10s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
   }
-  
-  .container {
-    margin: 50px auto;
-    max-width: 600px;
+  100% {
+    transform: translateX(-50%);
   }
-  
-  /* Error Header */
-  .error-header {
-    margin-bottom: 20px;
-  }
-  
-  .error-header h1 {
-    color: #ff4040;
-    font-size: 2rem;
-  }
-  
-  /* Retry Section */
-  .retry-section {
-    margin: 20px auto;
-    font-size: 1.2rem;
-    color: #ccc;
-  }
-  
-  /* Action Section */
-  .action-section {
-    margin-top: 30px;
-  }
-  
-  .retry-button {
-    padding: 15px 30px;
-    background: #ff4040;
-    border: none;
-    border-radius: 25px;
-    color: #fff;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: transform 0.3s ease, background 0.3s ease;
-  }
-  
-  .retry-button:hover {
-    background: #ff7070;
-    transform: scale(1.05);
-  }
-  
-  /* Support Footer */
-  .support-footer {
-    margin-top: 50px;
-    color: #bbb;
-  }
-  
-  .support-footer a {
-    color: #00ff80;
-    text-decoration: none;
-  }
-  
-  .support-footer a:hover {
-    text-decoration: underline;
-  }
-  
+}
+
+.container {
+  background-color: white;
+  width: 50%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: containerAnimation 1s ease-in-out;
+}
+
+@keyframes containerAnimation {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.error-header h1 {
+  font-family: 'Merriweather', serif;
+  color: #dc3545; /* Red color to indicate error */
+}
+
+.retry-section p {
+  margin-bottom: 20px;
+}
+
+.action-section {
+  display: flex;
+  justify-content: space-around;
+}
+
+.action-section .retry-button,
+.action-section .support-button {
+  width: 45%;
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.action-section .retry-button:hover,
+.action-section .support-button:hover {
+  background-color: #0056b3;
+}

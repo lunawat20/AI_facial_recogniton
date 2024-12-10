@@ -5,8 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Face Match</title>
   <link rel="stylesheet" href="page3.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="background-animation">
+    <img src="user2.jpg" alt="Background Image 1" class="bg-image">
+    <img src="user2.jpg" alt="Background Image 2" class="bg-image">
+  </div>
   <div class="container">
     <!-- Match Header -->
     <header class="header success-header">
@@ -15,7 +21,7 @@
 
     <!-- Profile Info -->
     <section class="profile-section">
-      <img id="matched-photo" src="user-photo.jpg" alt="User Photo" class="profile-photo">
+      <img id="matched-photo" src="user2.jpg" alt="User Photo" class="profile-photo">
       <div class="profile-info">
         <h2>Welcome, [User Name]!</h2>
         <p>Email: user@example.com</p>
@@ -23,10 +29,13 @@
       </div>
     </section>
 
-    <!-- Continue Button -->
+    <!-- Action Section -->
     <div class="action-section">
+      <button class="back-button">Go Back</button>
       <button class="continue-button">Continue</button>
     </div>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
