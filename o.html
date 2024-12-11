@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Capture Page</title>
+  <style>
+    /* Root variables for theme customization */
+    :root {
+      --primary-color: #007bff;
+      --secondary-color: #ff4081;
+      --text-color: #333;
+      --container-bg: rgba(215, 227, 218, 0.9);
+      --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      --border-radius: 10px;
+      --font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-image: url('Screenshot 2024-12-11 151903.png'); /* Replace with your image URL */
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: var(--text-color);
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      overflow-x: hidden;
+      animation: fadeIn 2s ease-out;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 20px auto;
+      background: var(--container-bg);
+      padding: 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      animation: slideUp 1.5s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: gradientShift 5s infinite;
+    }
+
+    .camera-section {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      background-color: #000;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+
+    .settings {
+      margin-bottom: 20px;
+    }
+
+    .settings label {
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    .settings input[type="range"] {
+      margin: 0 10px;
+    }
+
+    button {
+      margin: 10px;
+      padding: 12px 24px;
+      font-size: 16px;
+      cursor: pointer;
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      box-shadow: var(--box-shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 30px rgba(0, 123, 255, 0.5);
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    img {
+      border: 4px solid #ddd;
+      border-radius: 10px;
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+      box-shadow: var(--box-shadow);
+      transition: transform 0.5s ease;
+    }
+
+    img:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Face Capture </h1>
+    <p>Use your camera to capture image.Open your eyes properly and see on the camera</p>
+
+    <div class="camera-section">
+      <video id="camera" autoplay playsinline></video>
+      <canvas id="canvas" style="display: none;"></canvas>
+      <img id="captured-image" style="display: none;" />
+    </div>
+
+    <div class="controls">
+      <div class="settings">
+        <label for="brightness">Brightness:</label>
+        <input type="range" id="brightness" min="0" max="200" value="100">
+        <label for="contrast">Contrast:</label>
+        <input type="range" id="contrast" min="0" max="200" value="100">
+      </div>
+
+      <div class="buttons">
+        <button id="capture-btn">Capture</button>
+        <button id="download-btn" style="display: none;">Download Image</button>
+        <button id="retake-btn" style="display: none;">Retake</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Access video, canvas, and controls
+    const video = document.getElementById('camera');
+    const canvas = document.getElementById('canvas');
+    const captureBtn = document.getElementById('capture-btn');
+    const downloadBtn = document.getElementById('download-btn');
+    const retakeBtn = document.getElementById('retake-btn');
+    const capturedImage = document.getElementById('captured-image');
+    const brightness = document.getElementById('brightness');
+    const contrast = document.getElementById('contrast');
+
+    // Request access to the user's webcam
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then((stream) => {
+        video.srcObject = stream;
+      })
+      .catch((error) => {
+        console.error('Error accessing webcam:', error);
+        alert('Cannot access the webcam. Please grant permission.');
+      });
+
+    // Capture button click event
+    captureBtn.addEventListener('click', () => {
+      const context = canvas.getContext('2d');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context.filter = `brightness(${brightness.value}%) contrast(${contrast.value}%)`;
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      // Show captured image
+      capturedImage.src = canvas.toDataURL('image/png');
+      capturedImage.style.display = 'block';
+
+      // Show download and retake buttons
+      downloadBtn.style.display = 'inline-block';
+      retakeBtn.style.display = 'inline-block';
+    });
+
+    // Download button click event
+    downloadBtn.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = 'capture.png';
+      link.click();
+    });
+
+    // Retake button click event
+    retakeBtn.addEventListener('click', () => {
+      capturedImage.style.display = 'none';
+      downloadBtn.style.display = 'none';
+      retakeBtn.style.display = 'none';
+    });
+
+    // Adjust video settings dynamically
+    brightness.addEventListener('input', () => {
+      video.style.filter = `brightness(${brightness.value}%) contrast(${contrast.value}%)`;
+    });
+
+    contrast.addEventListener('input', () => {
+      video.style.filter = `brightness(${brightness.value}%) contrast(${contrast.value}%)`;
+    });
+  </script>
+</body>
+</html>
